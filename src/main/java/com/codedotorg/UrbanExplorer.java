@@ -102,8 +102,15 @@ public class UrbanExplorer {
      * Sorts the cities in the 'cities' list based on their names.
      */
     public void sortCities() {
-        
-
+        for(var i = 0; i < cities.size(); i++) {
+            for(var j = i + 1; j < cities.size(); j++) {
+                if(cities.get(i).getName().compareTo(cities.get(j).getName()) > 0) {
+                    City temp = cities.get(i);
+                    cities.set(i, cities.get(j));
+                    cities.set(j, temp);
+                } 
+            }
+        }
     }
 
     /**
@@ -113,6 +120,8 @@ public class UrbanExplorer {
      */
     public void refreshList() {
         listView.getItems().clear();
+
+        sortCities();
 
         for (City city : cities) {
             listView.getItems().add(city.getName());
